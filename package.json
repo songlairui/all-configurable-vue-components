@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "shorthash": "^0.0.2",
+    "shortid": "^2.2.14",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
     "vuedraggable": "^2.20.0",

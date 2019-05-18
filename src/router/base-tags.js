@@ -4,7 +4,8 @@ export default {
       'props-static',
       'props-dynamic-base',
       'props-dynamic-with-prop-keys',
-      'auto-type-props'
+      'auto-type-props',
+      'add-tree-props'
     ]
   }
 }
