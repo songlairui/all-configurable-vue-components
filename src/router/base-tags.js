@@ -27,6 +27,16 @@ export default [
           default: () => import('../views/base-html/props-dynamic-base'),
           dashboard: () => import('../views/base-html/props-dynamic-base/d')
         }
+      },
+      {
+        path: 'props-dynamic-with-prop-keys',
+        name: 'props-dynamic-with-prop-keys',
+        components: {
+          default: () =>
+            import('../views/base-html/props-dynamic-with-prop-keys'),
+          dashboard: () =>
+            import('../views/base-html/props-dynamic-with-prop-keys/d')
+        }
       }
     ]
   }

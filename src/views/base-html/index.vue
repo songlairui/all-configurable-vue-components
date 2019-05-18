@@ -3,13 +3,21 @@
     <div class="title">
       <h1>Base Html</h1>
       <button @click="prune">Snap</button>
+      <button @click="getPropKeys">Trans Prop Keys</button>
+      {{ propKeys }}
     </div>
     <div class="content d-f df-h">
       <div class="main">
-        <router-view :__MARK="mark" v-bind="value"></router-view>
+        <router-view ref="d" :__MARK="mark" v-bind="value"></router-view>
       </div>
       <div class="dashboard">
-        <router-view name="dashboard" :__MARK="mark | d" v-model="value"></router-view>
+        <router-view
+          ref="da"
+          name="dashboard"
+          :__MARK="mark | d"
+          v-model="value"
+          :propKeys="propKeys"
+        ></router-view>
       </div>
     </div>
   </div>
@@ -21,7 +29,8 @@ export default {
   data() {
     return {
       mark: "BaseHtml",
-      value: {}
+      value: {},
+      propKeys: []
     };
   },
   filters: {
@@ -35,6 +44,7 @@ export default {
   watch: {
     "$route.name"() {
       this.rescue();
+      this.getPropKeys();
     }
   },
   methods: {
@@ -48,11 +58,24 @@ export default {
       } catch (error) {
         this.value = {};
       }
+    },
+    getPropKeys() {
+      console.info("this.$refs.", this.$refs, this.$children);
+      const { d } = this.$refs;
+      if (!d) {
+        return;
+      }
+      this.propKeys = d.$options._propKeys.filter(
+        item => !item.startsWith("_")
+      );
     }
   },
   created() {
     this.rescue();
     console.info("this", this);
+  },
+  mounted() {
+    this.getPropKeys();
   }
 };
 </script>

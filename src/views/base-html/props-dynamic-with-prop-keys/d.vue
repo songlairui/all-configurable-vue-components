@@ -1,13 +1,10 @@
 <template>
   <div class="base-html-div-d">
     <h3>{{ __MARK }}</h3>
-    <div class="value-item" v-for="item in options">
+    <p>{{ propKeys }}</p>
+    <div class="value-item" v-for="item in propKeys">
       {{ item }}:
       <input v-model="props[item]">
-    </div>
-    <div class="actions">
-      <input type="text" v-model="aNewOne">
-      <button @click="addOption">添加一个配置项</button>
     </div>
   </div>
 </template>
@@ -22,7 +19,10 @@ const DEFAULT = {
 export default {
   props: {
     value: null,
-    __MARK: null
+    __MARK: null,
+    propKeys: {
+      default: () => []
+    }
   },
   data() {
     return {
