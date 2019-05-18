@@ -29,7 +29,12 @@ export default {
   },
   computed: {
     pageId() {
-      return this.$router.name;
+      return this.$route.name;
+    }
+  },
+  watch: {
+    "$route.name"() {
+      this.rescue();
     }
   },
   methods: {
@@ -47,6 +52,7 @@ export default {
   },
   created() {
     this.rescue();
+    console.info("this", this);
   }
 };
 </script>

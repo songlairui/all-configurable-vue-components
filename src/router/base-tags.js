@@ -2,7 +2,7 @@ export default [
   {
     path: '/base-html',
     name: 'base-html',
-    redirect: '/base-html/div',
+    redirect: '/base-html/props-static',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -13,10 +13,19 @@ export default [
     },
     children: [
       {
-        path: 'div',
+        path: 'props-static',
+        name: 'props-static',
         components: {
-          default: () => import('../views/base-html/div'),
-          dashboard: () => import('../views/base-html/div/d')
+          default: () => import('../views/base-html/props-static'),
+          dashboard: () => import('../views/base-html/props-static/d')
+        }
+      },
+      {
+        path: 'props-dynamic-base',
+        name: 'props-dynamic-base',
+        components: {
+          default: () => import('../views/base-html/props-dynamic-base'),
+          dashboard: () => import('../views/base-html/props-dynamic-base/d')
         }
       }
     ]
