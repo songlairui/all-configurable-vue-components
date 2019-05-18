@@ -1,6 +1,11 @@
 <template>
   <div class="input-string">
-    <input type="text" v-model="emitValue">
+    <input
+      :placeholder="placeholder"
+      type="text"
+      :value="emitValue"
+      @input="emitValue = $event.target.value"
+    >
   </div>
 </template>
 

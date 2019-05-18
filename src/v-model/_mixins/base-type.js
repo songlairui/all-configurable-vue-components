@@ -1,5 +1,6 @@
 export default {
   props: {
+    placeholder: null,
     value: [String, Boolean, Number],
     type: {
       type: String,

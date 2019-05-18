@@ -4,7 +4,6 @@
       <h1>Base Html</h1>
       <button @click="prune">Snap</button>
       <button @click="getPropsValidator">Trans Prop Keys</button>
-      {{ propsValidator }}
     </div>
     <div class="content d-f df-h">
       <div class="main">

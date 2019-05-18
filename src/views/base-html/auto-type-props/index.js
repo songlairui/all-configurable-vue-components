@@ -12,7 +12,7 @@ export default {
   },
   render() {
     return (
-      <div class="add-slot">
+      <div class="auto-type-props">
         {this.children.map((item) => (
           <div>{item}</div>
         ))}
