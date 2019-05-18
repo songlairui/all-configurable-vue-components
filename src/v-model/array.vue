@@ -8,8 +8,8 @@
       @end="drag = false"
     >
       <transition-group :name="!drag ? 'flip-list' : null">
-        <div v-for="(element,idx) in myArray" :key="element.id || element">
-          <input type="text" :value="element.name || element" @input="emit($event, idx)">
+        <div v-for="(element,idx) in myArray" :key="getId(element)">
+          <ValModel :schema="schema.items" :value="element" @input="emit($event, idx)"/>
         </div>
       </transition-group>
     </draggable>
@@ -18,8 +18,13 @@
 </template>
 
 <script>
+import DEFINITIONS, { getExample } from "@/definitions";
+
+import ValModel from "./index";
+
 export default {
   name: "VArray",
+  components: { ValModel },
   props: {
     schema: {
       default: () => ({})
@@ -53,12 +58,24 @@ export default {
     }
   },
   methods: {
-    addOneItem() {
-      this.$emit("input", [...this.value, Math.random()]);
+    getId(item) {
+      if (!item) {
+        return "-";
+      }
+      switch (typeof item) {
+        case "object":
+          return item._id || Object.values(item)[0];
+        default:
+          return `${item}`;
+      }
     },
-    emit(e, idx) {
+    addOneItem() {
+      const exampleItem = getExample(this.schema.items);
+      this.$emit("input", [...this.value, exampleItem]);
+    },
+    emit(val, idx) {
       const newVal = [...this.value];
-      newVal.splice(idx, 1, e.target.value);
+      newVal.splice(idx, 1, val);
       this.$emit("input", newVal);
     }
   }

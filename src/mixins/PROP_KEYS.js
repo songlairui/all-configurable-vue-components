@@ -1,6 +1,7 @@
 export default {
   props: {
     propsValidator: {
+      schema: Object,
       type: Object,
       default: () => ({})
     }
@@ -15,7 +16,8 @@ export default {
         let { type, schema = {} } = option
         items.push({
           propKey,
-          type: type ? type : schema.type
+          type,
+          schema
         })
       })
       return items

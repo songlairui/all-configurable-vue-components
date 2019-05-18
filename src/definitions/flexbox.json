@@ -1,0 +1,16 @@
+{
+  "_type": "FlexBox",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "direction": {
+        "type": "string",
+        "enum": ["row", "column"]
+      },
+      "child": {
+        "$ref": "#/definitions/flexbox"
+      }
+    }
+  }
+}
