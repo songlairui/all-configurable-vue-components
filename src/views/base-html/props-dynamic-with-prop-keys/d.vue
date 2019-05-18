@@ -1,28 +1,28 @@
 <template>
   <div class="base-html-div-d">
     <h3>{{ __MARK }}</h3>
-    <p>{{ propKeys }}</p>
-    <div class="value-item" v-for="item in propKeys">
-      {{ item }}:
-      <input v-model="props[item]">
+    <p>PROP_ITEMS: {{ PROP_ITEMS }}</p>
+    <div class="value-item" v-for="item in PROP_ITEMS">
+      {{ item.propKey }}[{{ item.type }}]:
+      <ValModel v-model="props[item.propKey]"/>
     </div>
   </div>
 </template>
 
 <script>
-import _ from "lodash";
+import PropKeysMixin from "@/mixins/PROP_KEYS";
+import ValModel from "@/v-model";
 
 const DEFAULT = {
   value: ""
 };
 
 export default {
+  mixins: [PropKeysMixin],
+  components: { ValModel },
   props: {
     value: null,
-    __MARK: null,
-    propKeys: {
-      default: () => []
-    }
+    __MARK: null
   },
   data() {
     return {

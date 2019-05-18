@@ -3,8 +3,8 @@
     <div class="title">
       <h1>Base Html</h1>
       <button @click="prune">Snap</button>
-      <button @click="getPropKeys">Trans Prop Keys</button>
-      {{ propKeys }}
+      <button @click="getPropsValidator">Trans Prop Keys</button>
+      {{ propsValidator }}
     </div>
     <div class="content d-f df-h">
       <div class="main">
@@ -16,7 +16,7 @@
           name="dashboard"
           :__MARK="mark | d"
           v-model="value"
-          :propKeys="propKeys"
+          :propsValidator="propsValidator"
         ></router-view>
       </div>
     </div>
@@ -30,7 +30,7 @@ export default {
     return {
       mark: "BaseHtml",
       value: {},
-      propKeys: []
+      propsValidator: {}
     };
   },
   filters: {
@@ -44,7 +44,7 @@ export default {
   watch: {
     "$route.name"() {
       this.rescue();
-      this.getPropKeys();
+      this.getPropsValidator();
     }
   },
   methods: {
@@ -59,15 +59,12 @@ export default {
         this.value = {};
       }
     },
-    getPropKeys() {
-      console.info("this.$refs.", this.$refs, this.$children);
+    getPropsValidator() {
       const { d } = this.$refs;
-      if (!d) {
+      if (!d || !d.$options.props) {
         return;
       }
-      this.propKeys = d.$options._propKeys.filter(
-        item => !item.startsWith("_")
-      );
+      this.propsValidator = d.$options.props;
     }
   },
   created() {
@@ -75,7 +72,7 @@ export default {
     console.info("this", this);
   },
   mounted() {
-    this.getPropKeys();
+    this.getPropsValidator();
   }
 };
 </script>
