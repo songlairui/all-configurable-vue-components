@@ -8,7 +8,7 @@
       @end="drag = false"
     >
       <transition-group :name="!drag ? 'flip-list' : null">
-        <div v-for="(element,idx) in myArray" :key="idx">
+        <div v-for="(element,idx) in myArray" :key="element.id || element">
           <input type="text" :value="element.name || element" @input="emit($event, idx)">
         </div>
       </transition-group>

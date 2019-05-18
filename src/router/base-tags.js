@@ -4,7 +4,7 @@ export default {
       'props-static',
       'props-dynamic-base',
       'props-dynamic-with-prop-keys',
-      'add-slot'
+      'auto-type-props'
     ]
   }
 }
