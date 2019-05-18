@@ -13,14 +13,12 @@
 </template>
 
 <script>
+import routeMeta from "@/router/base-tags";
+
 export default {
   data() {
     return {
-      links: [
-        "props-static",
-        "props-dynamic-base",
-        "props-dynamic-with-prop-keys"
-      ]
+      links: routeMeta["base-html"].children
     };
   }
 };

@@ -3,7 +3,8 @@ export default {
     children: [
       'props-static',
       'props-dynamic-base',
-      'props-dynamic-with-prop-keys'
+      'props-dynamic-with-prop-keys',
+      'add-slot'
     ]
   }
 }
