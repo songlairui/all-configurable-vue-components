@@ -24,7 +24,9 @@ export default {
   },
   computed: {
     ALL_KEYS() {
-      return Object.keys(this.schema.properties)
+      return Object.keys(this.schema.properties).filter(
+        (item) => item !== 'slot'
+      )
     },
     addAble() {
       return this.ALL_KEYS.length > this.KEYS.length

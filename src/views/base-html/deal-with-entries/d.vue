@@ -2,9 +2,12 @@
   <div class="add-slot">
     <h3>{{ __MARK }}</h3>
     <p>PROP_ITEMS: {{ Object.keys(PROP_ITEMS) }}</p>
-
+    <select :value="props.entry" @change="props.entry = $event.target.value">
+      <option disabled value>请选择入口 flexbox</option>
+      <option v-for="item in props.children" :key="item._id" :value="item._id">{{item._id}}</option>
+    </select>
     <div :class="{'only-show-child': onlyShowChild}">
-      <div class="value-item" v-for="item in PROP_ITEMS">
+      <div class="value-item" v-for="item in PROP_ITEMS.filter(v=>v!=='entry')">
         {{ item.propKey }} : {{ item.type || item.schema._type|| item.schema.type }}
         <div
           class="switch"
@@ -15,7 +18,11 @@
             <label for="only-show-child">只显示 child</label>
           </div>
         </div>
-        <ValModel :schema="item.schema" v-model="props[item.propKey]"/>
+        <ValModel
+          :available-slots="props.children"
+          :schema="item.schema"
+          v-model="props[item.propKey]"
+        />
       </div>
     </div>
   </div>

@@ -10,9 +10,10 @@ export default {
       type: 'integer',
       example: 1
     },
-    // slot: {
-    //   type: 'boolean'
-    // },
+    slot: {
+      type: 'string',
+      summary: '插槽 ID'
+    },
     child: {
       $ref: '#/definitions/flexbox-array'
     }

@@ -2,8 +2,8 @@
   <div class="input-object" :class="{leaf:isLeaf}">
     <FiledObjectChild>
       <div
-        class="property d-f"
         v-for="(KEY) in KEYS"
+        class="property d-f"
         :key="KEY"
         :slot="KEY === 'child' ? 'default' : 'overlay'"
       >
@@ -18,9 +18,16 @@
             :schema="fullfilSchema.properties[KEY]"
             :value="value[KEY]"
             :direction="value.direction"
+            :available-slots="availableSlots"
             @input="emit($event, KEY)"
           />
         </div>
+      </div>
+      <div v-if="isLeaf">
+        <select :value="value.slot" @change="emit($event.target.value, 'slot')">
+          <option disabled value>请选择入口 flexbox</option>
+          <option v-for="item in availableSlots" :key="item._id" :value="item._id">{{item._id}}</option>
+        </select>
       </div>
     </FiledObjectChild>
 
@@ -47,6 +54,9 @@ export default {
   name: "VObjectFlexbox",
   mixins: [ObjectMixin],
   components: { FiledObjectChild },
+  props: {
+    availableSlots: null
+  },
   computed: {
     isLeaf() {
       // 没有 child, 即为叶子节点

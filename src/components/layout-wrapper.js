@@ -22,8 +22,8 @@ export default {
           style="border: thin solid gray;margin: 1px;"
         >
           {context.scopedSlots[meta._id]
-            ? context.scopedSlots[meta._id]({ msg: '作用域数据' })
-            : `slot: ${meta._id}`}
+            ? context.scopedSlots[meta._id](meta)
+            : `slot: ${JSON.stringify(meta)}`}
         </div>
       )
     }

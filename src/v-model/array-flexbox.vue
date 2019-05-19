@@ -16,7 +16,12 @@
         <div class="array-item-with-actions" v-for="(element,idx) in myArray" :key="getId(element)">
           <button class="move-trigger">🏃</button>
           <button class="close" @click="del(idx)">x</button>
-          <ValModel :schema="fullfilSchema.items" :value="element" @input="emit($event, idx)"/>
+          <ValModel
+            :available-slots="availableSlots.filter(item => item._id !== element._id)"
+            :schema="fullfilSchema.items"
+            :value="element"
+            @input="emit($event, idx)"
+          />
         </div>
         <button @click="addOneItem" key="last">+</button>
       </transition-group>
@@ -32,7 +37,8 @@ export default {
   name: "VArrayFlexbox",
   mixins: [ArrayMixin],
   props: {
-    direction: String
+    direction: String,
+    availableSlots: null
   },
   computed: {
     directionClass() {
