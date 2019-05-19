@@ -14,10 +14,16 @@
       </div>
     </div>
     <template v-if="addAble">
-      <select @change="selectKey($event)">
-        <option value>请选择</option>
-        <option v-for="KEY_TO in KEYS_TO_ADD" :key="KEY_TO" :value="KEY_TO">+ {{ KEY_TO }}</option>
-      </select>
+      <template v-if="KEYS_TO_ADD.length === 1">
+        <button @click="selectKey(KEYS_TO_ADD[0])">+ {{ KEYS_TO_ADD[0] }}</button>
+      </template>
+      <template v-else>
+        <select ref="select" @change="selectKey($event.target.value)">
+          <option disabled value>请选择</option>
+          <option v-for="KEY_TO in KEYS_TO_ADD" :key="KEY_TO" :value="KEY_TO">+ {{ KEY_TO }}</option>
+        </select>
+        <button @click="selectKey($refs.select.value)">+</button>
+      </template>
     </template>
   </div>
 </template>

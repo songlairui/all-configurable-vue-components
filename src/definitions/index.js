@@ -19,7 +19,7 @@ const getObjectExample = function({ properties = {} }) {
     if (isRef(schema)) {
       return
     }
-    data[key] = getExample(schema, 0)
+    data[key] = getExample(schema)
   })
   data._id = shortid.generate()
   return data
@@ -32,9 +32,9 @@ export const getExample = function(schema = {}) {
   if (isRef(schema)) {
     return getExample(getSchemaByref(schema))
   }
-  const { example } = schema
-  if (example) {
-    return example
+  const { example, default: dVal, enum: enums = [] } = schema
+  if (example || dVal || enums.length) {
+    return example || dVal || enums[0]
   }
   switch (schema.type) {
     case 'string':

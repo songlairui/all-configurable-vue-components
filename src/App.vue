@@ -26,6 +26,9 @@ body,
   margin: 0;
   padding: 0;
 }
+.stage {
+  overflow: hidden;
+}
 .d-f {
   display: flex;
   &-v {

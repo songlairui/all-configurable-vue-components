@@ -7,7 +7,12 @@
       @start="drag = true"
       @end="drag = false"
     >
-      <transition-group :class="directionClass" tag="div" :name="!drag ? 'flip-list' : null">
+      <transition-group
+        class="list-wrapper"
+        :class="directionClass"
+        tag="div"
+        :name="!drag ? 'flip-list' : null"
+      >
         <div v-for="(element,idx) in myArray" :key="getId(element)">
           <button @click="del(idx)">x</button>
           <ValModel :schema="schema.items" :value="element" @input="emit($event, idx)"/>
@@ -51,5 +56,8 @@ export default {
   .deep-f-h {
     display: flex;
   }
+}
+.list-wrapper {
+  overflow: auto;
 }
 </style>

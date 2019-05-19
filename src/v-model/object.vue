@@ -13,7 +13,7 @@
       </div>
     </div>
     <template v-if="addAble">
-      <select @change="selectKey($event)">
+      <select @change="selectKey($event.target.value)">
         <option value>请选择</option>
         <option v-for="KEY_TO in KEYS_TO_ADD" :key="KEY_TO" :value="KEY_TO">+ {{ KEY_TO }}</option>
       </select>
@@ -31,10 +31,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.property {
+.input-object {
   border: thin solid silver;
   padding: 0.3em 0.5em;
   border-radius: 0.5em;
+  .property {
+    border: thin solid silver;
+    padding: 0.3em 0.5em;
+    border-radius: 0.5em;
+  }
 }
 </style>
 

@@ -1,4 +1,5 @@
 import VString from './string'
+import VEnum from './enum'
 import { getType } from './_utils'
 
 const VArray = () => import('./array')
@@ -20,15 +21,13 @@ export default {
     data.props = { ...data.props, type, schema, ...allProps }
     const expectedType = getType(type).toLowerCase()
     let vNode = VString
-    console.info(
-      expectedType,
-      schema.type,
-      schema._type,
-      'expectedType || schema.type'
-    )
-    const finalType = `${schema._type ||
+    let finalType = `${schema._type ||
       schema.type ||
       expectedType}`.toLowerCase()
+    if (finalType === 'string' && schema.enum) {
+      finalType = 'enum'
+      data.props.enums = schema.enum
+    }
     switch (finalType) {
       case 'array':
         vNode = VArray
@@ -41,6 +40,9 @@ export default {
         break
       case 'object':
         vNode = VObject
+        break
+      case 'enum':
+        vNode = VEnum
         break
       default:
     }

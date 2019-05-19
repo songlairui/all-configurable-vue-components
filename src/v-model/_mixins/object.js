@@ -39,9 +39,9 @@ export default {
     }
   },
   methods: {
-    selectKey(e) {
-      if (e.target.value) {
-        this.KEYS.push(e.target.value)
+    selectKey(val) {
+      if (val) {
+        this.KEYS.push(val)
       }
     },
     emit(val, KEY) {
