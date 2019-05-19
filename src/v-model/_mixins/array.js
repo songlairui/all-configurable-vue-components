@@ -1,8 +1,10 @@
 import { getExample } from '@/definitions'
 
 import ValModel from '../index'
+import FullfilSchema from './fullfilSchema'
 
 export default {
+  mixins: [FullfilSchema],
   components: { ValModel },
   props: {
     schema: {

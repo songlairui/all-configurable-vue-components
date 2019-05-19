@@ -1,8 +1,11 @@
 import _ from 'lodash'
-import { getExample, getSchemaByref } from '@/definitions'
+import { getExample } from '@/definitions'
 import ValModel from '../index'
 
+import FullfilSchema from './fullfilSchema'
+
 export default {
+  mixins: [FullfilSchema],
   components: { ValModel },
   props: {
     value: {
@@ -20,14 +23,6 @@ export default {
     }
   },
   computed: {
-    fullfilSchema() {
-      const { properties } = this.schema
-      const fullfil = {}
-      Object.entries(properties).forEach(([key, value]) => {
-        fullfil[key] = value.$ref ? getSchemaByref(value) : value
-      })
-      return { ...this.schema, properties: fullfil }
-    },
     ALL_KEYS() {
       return Object.keys(this.schema.properties)
     },

@@ -5,7 +5,8 @@ export default {
       'props-dynamic-base',
       'props-dynamic-with-prop-keys',
       'auto-type-props',
-      'add-tree-props'
+      'add-tree-props',
+      'deal-with-entries'
     ]
   }
 }

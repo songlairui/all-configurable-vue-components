@@ -4,7 +4,7 @@
     <p>PROP_ITEMS: {{ Object.keys(PROP_ITEMS) }}</p>
     <div class="option-item" style="cursor: pointer">
       <input type="checkbox" id="only-show-child" v-model="onlyShowChild">
-      <label for="only-show-child">FlexBox 只显示 child</label>
+      <label for="only-show-child">FlebBox 只显示 child</label>
     </div>
     <div :class="{'only-show-child': onlyShowChild}">
       <div class="value-item" v-for="item in PROP_ITEMS">

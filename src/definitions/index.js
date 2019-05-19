@@ -1,11 +1,16 @@
+import _ from 'lodash'
 import shortid from 'shortid'
-import flexbox from './flexbox'
+import FlexboxArray from './flexbox-array'
+import FlexboxItem from './flexbox-item'
 
 const pool = {
-  flexbox
+  FlexboxArray,
+  FlexboxItem
 }
-export const getSchemaByref = function({ $ref: ref }) {
-  const target = ref.replace('#/definitions/', '')
+
+export const getSchemaByref = function({ $ref }) {
+  const target = _.upperFirst(_.camelCase($ref.replace('#/definitions/', '')))
+  // console.info('target', target, $ref)
   return pool[target]
 }
 

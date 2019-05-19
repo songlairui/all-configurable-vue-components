@@ -1,12 +1,12 @@
-import { FlexBox } from '@/definitions/types'
+import { FlexboxArray } from '@/definitions/types'
 
-import LayoutWrapper from './layout-wrapper'
+import LayoutWrapper from '@/components/layout-wrapper'
 
 export default {
   props: {
     value: null,
     child: Array,
-    layout: FlexBox
+    layout: FlexboxArray
   },
   render() {
     return (

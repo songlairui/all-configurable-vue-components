@@ -29,14 +29,18 @@ export default {
       finalType = 'enum'
       data.props.enums = schema.enum
     }
+
+    // console.group(finalType)
+    // console.info('schema', schema)
+
     switch (finalType) {
       case 'array':
         vNode = VArray
         break
-      case 'flexbox':
+      case 'flexboxarray':
         vNode = VArrayFlexbox
         break
-      case 'flexboxobj':
+      case 'flexboxitem':
         vNode = VObjectFlexbox
         break
       case 'object':
@@ -50,7 +54,9 @@ export default {
         break
       default:
     }
+    const result = h(vNode, data, children)
+    // console.groupEnd()
 
-    return h(vNode, data, children)
+    return result
   }
 }

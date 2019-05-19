@@ -16,7 +16,7 @@
         <div class="array-item-with-actions" v-for="(element,idx) in myArray" :key="getId(element)">
           <button class="move-trigger">🏃</button>
           <button class="close" @click="del(idx)">x</button>
-          <ValModel :schema="schema.items" :value="element" @input="emit($event, idx)"/>
+          <ValModel :schema="fullfilSchema.items" :value="element" @input="emit($event, idx)"/>
         </div>
         <button @click="addOneItem" key="last">+</button>
       </transition-group>
