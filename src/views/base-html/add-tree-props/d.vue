@@ -2,9 +2,12 @@
   <div class="add-slot">
     <h3>{{ __MARK }}</h3>
     <p>PROP_ITEMS: {{ Object.keys(PROP_ITEMS) }}</p>
-    <div class="value-item" v-for="item in PROP_ITEMS">
-      {{ item }}:
-      <ValModel :schema="item.schema" :type="item.type" v-model="props[item.propKey]"/>
+    <input type="checkbox" v-model="onlyShowChild">
+    <div :class="{'only-show-child': onlyShowChild}">
+      <div class="value-item" v-for="item in PROP_ITEMS">
+        {{ item }}:
+        <ValModel :schema="item.schema" :type="item.type" v-model="props[item.propKey]"/>
+      </div>
     </div>
   </div>
 </template>
@@ -16,7 +19,8 @@ import ValModel from "@/v-model";
 
 const DEFAULT = {
   value: "",
-  children: []
+  child: [],
+  layout: []
 };
 
 export default {
@@ -29,7 +33,8 @@ export default {
   data() {
     return {
       props: _.cloneDeep(DEFAULT),
-      aNewOne: ""
+      aNewOne: "",
+      onlyShowChild: false
     };
   },
   computed: {

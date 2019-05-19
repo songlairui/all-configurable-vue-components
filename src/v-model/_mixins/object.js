@@ -38,6 +38,17 @@ export default {
       return this.ALL_KEYS.filter((key) => !this.KEYS.includes(key))
     }
   },
+  watch: {
+    value: {
+      immediate: true,
+      handler(val) {
+        if (!val) {
+          return
+        }
+        this.KEYS = this.ALL_KEYS.filter((key) => val[key] !== undefined)
+      }
+    }
+  },
   methods: {
     selectKey(val) {
       if (val) {

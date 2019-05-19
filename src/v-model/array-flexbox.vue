@@ -13,8 +13,9 @@
         tag="div"
         :name="!drag ? 'flip-list' : null"
       >
-        <div v-for="(element,idx) in myArray" :key="getId(element)">
-          <button @click="del(idx)">x</button>
+        <div class="array-item-with-actions" v-for="(element,idx) in myArray" :key="getId(element)">
+          <button class="move-trigger">🏃</button>
+          <button class="close" @click="del(idx)">x</button>
           <ValModel :schema="schema.items" :value="element" @input="emit($event, idx)"/>
         </div>
         <button @click="addOneItem" key="last">+</button>
@@ -39,9 +40,9 @@ export default {
     }
   },
   created() {
-    if (!this.myArray.length) {
-      this.addOneItem();
-    }
+    // if (!this.myArray.length) {
+    //   this.addOneItem();
+    // }
   }
 };
 </script>
@@ -51,7 +52,10 @@ export default {
 @deep: ~">>>";
 
 .input-array {
-  border: thin solid silver;
+  border: thin solid darkseagreen;
+  background: cornsilk;
+  margin: 3px;
+  border-radius: 3px;
   padding: 0.3em;
   .deep-f-h {
     display: flex;
@@ -59,5 +63,36 @@ export default {
 }
 .list-wrapper {
   overflow: auto;
+}
+.array-item-with-actions {
+  border: thin solid cadetblue;
+  background: rgba(255, 255, 255, 0.9);
+  margin: 3px;
+  border-radius: 3px;
+  position: relative;
+  .move-trigger,
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    cursor: pointer;
+    border-radius: 4px;
+    border: thin solid transparent;
+    z-index: 99;
+  }
+  .close {
+    background: maroon;
+    color: lavenderblush;
+  }
+  .move-trigger {
+    right: 2em;
+    border: thin solid mediumslateblue;
+  }
+
+  &:hover > .move-trigger,
+  &:hover > .close {
+    display: inline;
+  }
 }
 </style>
