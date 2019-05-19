@@ -2,10 +2,11 @@ export default {
   functional: true,
   name: 'LayoutWrapper',
   props: {
-    layout: null
+    layout: null,
+    scopedata: null
   },
   render(h, context) {
-    const { layout } = context.props
+    const { layout, scopedata } = context.props
     // console.info('context', context)
 
     const renderFlex = (meta) => {
@@ -22,7 +23,7 @@ export default {
           style="border: thin solid gray;margin: 1px;"
         >
           {context.scopedSlots[meta._id]
-            ? context.scopedSlots[meta._id](meta)
+            ? context.scopedSlots[meta._id](scopedata)
             : `${meta.slot ? `slot:${meta.slot}` : `_id:${meta._id}`}`}
         </div>
       )

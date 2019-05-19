@@ -27,11 +27,14 @@ export default {
       Object.keys(slotMap).forEach((slotKey) => {
         const targetSlotKey = slotMap[slotKey].slot
         slotMap[slotKey] = (scopeProps) => {
-          return genLayout({
-            entry: targetSlotKey,
-            pool: [...nextPool],
-            rendered: []
-          })
+          return genLayout(
+            {
+              entry: targetSlotKey,
+              pool: [...nextPool],
+              rendered: []
+            },
+            scopeProps
+          )
         }
       })
       return slotMap
@@ -43,7 +46,7 @@ export default {
         <LayoutWrapper
           layout={[layout]}
           scopedSlots={slotMap}
-          sc={{ ...options }}
+          scopedata={options}
         />
       ) : (
         <h2>No Entry</h2>
