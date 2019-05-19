@@ -9,6 +9,10 @@
         "type": "string",
         "enum": ["row", "column"]
       },
+      "flex": {
+        "type": "integer",
+        "example": 1
+      },
       "child": {
         "$ref": "#/definitions/flexbox"
       }
