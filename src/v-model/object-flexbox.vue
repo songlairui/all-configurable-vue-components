@@ -24,8 +24,12 @@
         </div>
       </div>
       <div v-if="isLeaf">
-        <select :value="value.slot" @change="emit($event.target.value, 'slot')">
-          <option disabled value>请选择入口 flexbox</option>
+        <select
+          :value="value.slot"
+          @change="$event.target.value ? emit($event.target.value, 'slot') : del('slot')"
+        >
+          <option disabled>请选择入口 flexbox</option>
+          <option value>--</option>
           <option v-for="item in availableSlots" :key="item._id" :value="item._id">{{item._id}}</option>
         </select>
       </div>

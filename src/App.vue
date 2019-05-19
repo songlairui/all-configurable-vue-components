@@ -41,6 +41,7 @@ body,
 .f-c-c {
   justify-content: center;
   align-items: center;
+  word-break: break-all;
 }
 nav.sub-nav,
 .main,
