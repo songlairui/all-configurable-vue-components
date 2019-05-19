@@ -23,7 +23,7 @@ export default {
         >
           {context.scopedSlots[meta._id]
             ? context.scopedSlots[meta._id](meta)
-            : `slot: ${JSON.stringify(meta)}`}
+            : `${meta.slot ? `slot:${meta.slot}` : `_id:${meta._id}`}`}
         </div>
       )
     }

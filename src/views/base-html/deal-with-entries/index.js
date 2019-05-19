@@ -1,22 +1,57 @@
+import _ from 'lodash'
 import { FlexboxArray } from '@/definitions/types'
 import LayoutWrapper from '@/components/layout-wrapper'
 
-const calcSlotMap = (flexboxMeta = {}, childKey = 'child') => {
+const calcSlotMap = (
+  flexboxMeta = {},
+  parentId = [],
+  rendered = [],
+  options = {}
+) => {
   const result = {}
+  const { childKey = 'child' } = options
   const { [childKey]: children, _id, slot } = flexboxMeta
-  if (slot) {
-    result[_id] = slot
+  const currentPath = [...parentId, _id]
+  rendered.push(_id)
+  if (rendered.includes(slot)) {
+    console.error(`Slot [${_id}] refs to [${slot}] was circled ~. Skipped`)
+  } else if (slot) {
+    result[_id] = { slot, currentPath }
   }
   if (children) {
     if (Array.isArray(children)) {
       children.forEach((item) => {
-        const subMap = calcSlotMap(item)
+        const { result: subMap } = calcSlotMap(item, currentPath, rendered)
         Object.assign(result, subMap)
       })
     }
   }
 
-  return result
+  return { result, rendered }
+}
+
+const calcSlotStopCircle = (
+  { entry = '', pool = [] },
+  rendered = [],
+  options = {}
+) => {
+  const start = pool.find(({ _id }) => entry === _id)
+  if (!start) {
+    return { result: {}, rendered }
+  }
+  // console.group('~')
+  const { result } = calcSlotMap(start, [], rendered, options)
+  Object.values(result).forEach(({ slot: subKey }) => {
+    const { result: subResult } = calcSlotStopCircle(
+      { entry: subKey, pool },
+      rendered,
+      options
+    )
+    Object.assign(result, subResult)
+  })
+  // console.groupEnd()
+
+  return { result, rendered }
 }
 
 export default {
@@ -29,9 +64,14 @@ export default {
   },
   render() {
     const entryLayout = this.children.find((item) => item._id === this.entry)
-    const slotMap = calcSlotMap(entryLayout)
+    const slotMapOri = calcSlotStopCircle({
+      entry: this.entry,
+      pool: this.children
+    }).result
+    // console.info(slotMapOri, 'slotMap')
+    const slotMap = _.cloneDeep(slotMapOri || {})
     Object.keys(slotMap).forEach((slotKey) => {
-      const targetSlotKey = slotMap[slotKey]
+      const targetSlotKey = slotMap[slotKey].slot
       const targetLayout = this.children.find(
         (item) => item._id === targetSlotKey
       )
@@ -51,9 +91,7 @@ export default {
           {this.children && this.children.map((i) => i._id).join()}
         </div>
         {entryLayout ? (
-          <LayoutWrapper layout={[entryLayout]} scopedSlots={slotMap}>
-            <div>default slot</div>
-          </LayoutWrapper>
+          <LayoutWrapper layout={[entryLayout]} scopedSlots={slotMap} />
         ) : (
           <h2>No Entry</h2>
         )}

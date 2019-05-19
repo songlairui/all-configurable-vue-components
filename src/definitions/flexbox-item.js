@@ -12,7 +12,9 @@ export default {
     },
     slot: {
       type: 'string',
-      summary: '插槽 ID'
+      summary: '插槽 ID',
+      default: '',
+      example: ''
     },
     child: {
       $ref: '#/definitions/flexbox-array'
