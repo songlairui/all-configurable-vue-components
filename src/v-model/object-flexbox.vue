@@ -1,5 +1,5 @@
 <template>
-  <div class="input-object">
+  <div class="input-object" :class="{leaf:isLeaf}">
     <FiledObjectChild>
       <div
         class="property d-f"
@@ -7,7 +7,10 @@
         :key="KEY"
         :slot="KEY === 'child' ? 'default' : 'overlay'"
       >
-        <div class="label">{{ KEY }}</div>
+        <div class="label">
+          <span @click="del(KEY)" class="del">x</span>
+          {{ KEY }}
+        </div>
         <div class="holder d-f-h">
           <ValModel
             :label="KEY"
@@ -43,13 +46,22 @@ import FiledObjectChild from "./field/object-child";
 export default {
   name: "VObjectFlexbox",
   mixins: [ObjectMixin],
-  components: { FiledObjectChild }
+  components: { FiledObjectChild },
+  computed: {
+    isLeaf() {
+      // 没有 child, 即为叶子节点
+      return !this.KEYS.includes("child");
+    }
+  }
 };
 </script>
 
 <style lang="less" scoped>
 .input-object {
   padding: 2px;
+  &.leaf {
+    background: springgreen;
+  }
   .property {
     padding: 1em 0.5em 0.3em;
     position: relative;
@@ -66,6 +78,12 @@ export default {
       left: 3px;
       &::after {
         content: " :";
+      }
+      > .del {
+        cursor: pointer;
+        color: red;
+        display: inline-block;
+        padding: 0 2px;
       }
     }
   }

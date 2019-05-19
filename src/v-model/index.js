@@ -1,4 +1,5 @@
 import VString from './string'
+import VBoolean from './boolean'
 import VEnum from './enum'
 import { getType } from './_utils'
 
@@ -43,6 +44,9 @@ export default {
         break
       case 'enum':
         vNode = VEnum
+        break
+      case 'boolean':
+        vNode = VBoolean
         break
       default:
     }

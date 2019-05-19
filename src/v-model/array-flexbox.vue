@@ -39,10 +39,10 @@ export default {
       return this.direction === "column" ? "deep-f-v" : "deep-f-h";
     }
   },
-  created() {
-    // if (!this.myArray.length) {
-    //   this.addOneItem();
-    // }
+  mounted() {
+    if (!this.myArray.length) {
+      this.addOneItem();
+    }
   }
 };
 </script>

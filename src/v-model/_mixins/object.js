@@ -59,6 +59,11 @@ export default {
       const { ...newVal } = this.value
       newVal[KEY] = val
       this.$emit('input', newVal)
+    },
+    del(KEY) {
+      const { ...newVal } = this.value
+      delete newVal[KEY]
+      this.$emit('input', newVal)
     }
   }
 }
