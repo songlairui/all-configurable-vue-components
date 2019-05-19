@@ -2,6 +2,7 @@
   "_type": "FlexBox",
   "type": "array",
   "items": {
+    "_type": "FlexBoxObj",
     "type": "object",
     "properties": {
       "direction": {

@@ -8,6 +8,7 @@
           :placeholder="KEY"
           :schema="fullfilSchema.properties[KEY]"
           :value="value[KEY]"
+          :direction="value.direction"
           @input="emit($event, KEY)"
         />
       </div>
