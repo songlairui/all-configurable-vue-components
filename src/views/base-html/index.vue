@@ -1,11 +1,11 @@
 <template>
-  <div class="base-html df-h d-f d-f-v">
+  <div class="base-html df-h d-f d-f-v overh">
     <div class="title">
       <h1>Base Html</h1>
       <button @click="prune">Snap</button>
       <button @click="getPropsValidator">Trans Prop Keys</button>
     </div>
-    <div class="content d-f df-h">
+    <div class="content d-f df-h overh">
       <div class="main">
         <router-view ref="d" :__MARK="mark" v-bind="value"></router-view>
       </div>
@@ -77,9 +77,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.content,
-.dashboard {
-  overflow: auto;
-}
 </style>
 

@@ -1,15 +1,21 @@
 <template>
-  <div class="add-tree-props overauto">
+  <div class="add-slot">
     <h3>{{ __MARK }}</h3>
     <p>PROP_ITEMS: {{ Object.keys(PROP_ITEMS) }}</p>
-    <div class="option-item" style="cursor: pointer">
-      <input type="checkbox" id="only-show-child" v-model="onlyShowChild">
-      <label for="only-show-child">FlebBox 只显示 child</label>
-    </div>
+
     <div :class="{'only-show-child': onlyShowChild}">
       <div class="value-item" v-for="item in PROP_ITEMS">
         {{ item.propKey }} : {{ item.type || item.schema._type|| item.schema.type }}
-        <ValModel :schema="item.schema" :type="item.type" v-model="props[item.propKey]"/>
+        <div
+          class="switch"
+          v-if="item.schema && item.schema._type && item.schema._type.startsWith('Flexbox')"
+        >
+          <div class="option-item" style="cursor: pointer">
+            <input type="checkbox" id="only-show-child" v-model="onlyShowChild">
+            <label for="only-show-child">只显示 child</label>
+          </div>
+        </div>
+        <ValModel :schema="item.schema" v-model="props[item.propKey]"/>
       </div>
     </div>
   </div>
@@ -19,12 +25,17 @@
 import _ from "lodash";
 import PropKeysMixin from "@/mixins/PROP_KEYS";
 import ValModel from "@/v-model";
+import { getExample } from "@/definitions";
 
-const DEFAULT = {
-  value: "",
-  child: [],
-  layout: []
-};
+import RUNTIME from "./index";
+
+const DEFAULT = Object.entries(RUNTIME.props).reduce(
+  (result, [propKey, propItem]) => {
+    result[propKey] = propItem.schema ? getExample(propItem.schema) : "";
+    return result;
+  },
+  {}
+);
 
 export default {
   mixins: [PropKeysMixin],
@@ -82,5 +93,10 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+.add-slot {
+  height: 100%;
+  overflow: auto;
+}
 </style>
+

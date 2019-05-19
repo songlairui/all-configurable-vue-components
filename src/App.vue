@@ -49,6 +49,7 @@ nav.sub-nav,
   border: medium mediumseagreen double;
   border-radius: 1em;
   padding: 0.5em;
+  overflow: hidden;
 }
 .sub-nav {
   flex: 0 0 15em;
@@ -61,5 +62,13 @@ nav.sub-nav,
 }
 .dashboard {
   flex: 1 0 768px;
+}
+.overh {
+  overflow: hidden;
+}
+.overauto {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
 }
 </style>
