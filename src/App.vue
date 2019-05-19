@@ -13,6 +13,23 @@
       <div class="main d-f df-h">
         <router-view/>
       </div>
+      <div class="stores">
+        <h3>Vuex</h3>
+        <dl>
+          <dt>getter</dt>
+          <dd>customCondition</dd>
+          <dt>action</dt>
+          <dd>RESET</dd>
+        </dl>
+        <dl>
+          <dt>API</dt>
+          <dt>data</dt>
+        </dl>
+        <dl>
+          <dt>TODO</dt>
+          <dd>组件的js方法, 服务端统计调用频次,动态划分chunk</dd>
+        </dl>
+      </div>
     </div>
   </div>
 </template>

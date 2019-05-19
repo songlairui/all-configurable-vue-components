@@ -17,11 +17,15 @@
           <button class="move-trigger">🏃</button>
           <button class="close" @click="del(idx)">x</button>
           <ValModel
-            :available-slots="availableSlots.filter(item => item._id !== element._id)"
+            :available-slots="availableSlots && availableSlots.filter(item => item._id !== element._id)"
             :schema="fullfilSchema.items"
             :value="element"
             @input="emit($event, idx)"
-          />
+          >
+            <template v-slot:leaf="leaf">
+              <slot v-bind="leaf" name="toleaf"/>
+            </template>
+          </ValModel>
         </div>
         <button @click="addOneItem" key="last">+</button>
       </transition-group>

@@ -6,7 +6,8 @@ export default {
       'props-dynamic-with-prop-keys',
       'auto-type-props',
       'add-tree-props',
-      'deal-with-entries'
+      'deal-with-entries',
+      'combine-reset-bar'
     ]
   }
 }

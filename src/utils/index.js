@@ -1,3 +1,21 @@
+export const collectLeafSlot = (
+  flexboxMeta = {},
+  result = [],
+  options = {}
+) => {
+  const { childKey = 'child' } = options
+  const { [childKey]: children, _id } = flexboxMeta
+  if (!children) {
+    result.push(_id)
+  } else if (Array.isArray(children)) {
+    children.forEach((item) => {
+      result.push(...collectLeafSlot(item, [], options))
+    })
+  }
+
+  return result
+}
+
 export const calcSlotMap = (
   flexboxMeta = {},
   parentId = [],

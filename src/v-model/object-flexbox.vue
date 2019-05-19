@@ -20,7 +20,11 @@
             :direction="value.direction"
             :available-slots="availableSlots"
             @input="emit($event, KEY)"
-          />
+          >
+            <template v-slot:toleaf="leaf">
+              <slot v-bind="leaf" name="leaf"/>
+            </template>
+          </ValModel>
         </div>
       </div>
       <div v-if="isLeaf">
@@ -32,6 +36,7 @@
           <option value>--</option>
           <option v-for="item in availableSlots" :key="item._id" :value="item._id">{{item._id}}</option>
         </select>
+        <slot v-bind="value" name="leaf"/>
       </div>
     </FiledObjectChild>
 
