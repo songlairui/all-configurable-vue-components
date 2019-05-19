@@ -6,7 +6,7 @@ export default {
   },
   render(h, context) {
     const { layout } = context.props
-    console.info('context', context)
+    // console.info('context', context)
 
     const renderFlex = (meta) => {
       const d = meta.direction === 'column' ? 'd-f-v' : ''
