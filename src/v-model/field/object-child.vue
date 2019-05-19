@@ -25,9 +25,9 @@ export default {
     .overlay {
       display: none;
     }
-    &:hover > .overlay {
-      display: block;
-    }
+    // &:hover > .overlay {
+    //   display: block;
+    // }
   }
 }
 </style>

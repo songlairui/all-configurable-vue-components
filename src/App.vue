@@ -38,7 +38,10 @@ body,
 .df-h {
   flex: 9;
 }
-
+.f-c-c {
+  justify-content: center;
+  align-items: center;
+}
 nav.sub-nav,
 .main,
 .dashboard {

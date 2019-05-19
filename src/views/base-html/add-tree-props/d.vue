@@ -2,10 +2,13 @@
   <div class="add-slot">
     <h3>{{ __MARK }}</h3>
     <p>PROP_ITEMS: {{ Object.keys(PROP_ITEMS) }}</p>
-    <input type="checkbox" v-model="onlyShowChild">
+    <div class="option-item" style="cursor: pointer">
+      <input type="checkbox" id="only-show-child" v-model="onlyShowChild">
+      <label for="only-show-child">FlexBox 只显示 child</label>
+    </div>
     <div :class="{'only-show-child': onlyShowChild}">
       <div class="value-item" v-for="item in PROP_ITEMS">
-        {{ item }}:
+        {{ item.propKey }} : {{ item.type || item.schema._type|| item.schema.type }}
         <ValModel :schema="item.schema" :type="item.type" v-model="props[item.propKey]"/>
       </div>
     </div>
